@@ -3,24 +3,43 @@
 int main()
 {
 	BulkClub    list;			// CALC		  - list of members
-	Basic      *listMember;	// CALC 	  - adds members to list
+	purchase   *dayOne;			// CALC 	  - purchase for day
+	purchase   *dayTwo;			// CALC 	  - purchases for day
+	purchase   *dayThree;		// CALC 	  - purchase for day
+	purchase   *dayFour;		// CALC 	  - purchases for day
+	purchase   *dayFive;		// CALC 	  - purchases for day
+	Basic      *listMember;		// CALC 	  - adds members to list
 	Basic      *memberPtr;		// CALC & OUT - accesses members from list
 	string      name;			// IN & OUT   - name of members
-	int         id;			// IN & OUT   - age of members
+	int         id;				// IN & OUT   - age of members
 	bool        found;			// CALC 	  - determines if remove success
 	MenuOptions menuChoice;		// CALC 	  - user menu choice
-	char		memberType;		//IN - used to input
-	char 		searchOp;
+	char		memberType;		// IN         - used to input
+	char 		searchOp;       //
 
-	list = ReadInFromFile();
+	dayOne   = NULL;
+	dayTwo   = NULL;
+	dayThree =  NULL;
+	dayFour  =  NULL;
+	dayFive  =  NULL;
+
+	list     = ReadInFromFile();
+//	dayOne   = ReadInDailyPurchases("day1.txt", dayOne);
+//	dayOne   = ReadInDailyPurchases("day2.txt", dayOne);
+//	dayOne   = ReadInDailyPurchases("day3.txt", dayOne);
+//	dayOne   = ReadInDailyPurchases("day4.txt", dayOne);
+//	dayOne   = ReadInDailyPurchases("day5.txt", dayOne);
+
+
+
 	const string MENU_PROMPT =
 				"1 - Add Member \n"
-				"2 - Remove Member \n"
-				"4 - Find Member   \n"
-				"5 - List Size   \n"
-				"6 - Output List \n"
-				"7 - Clear List   \n"
-				"0 - EXIT \n"
+				"2 - Remove Member\n"
+				"4 - Find Member\n"
+				"5 - List Size\n"
+				"6 - Output List\n"
+				"7 - Clear List\n"
+				"0 - EXIT\n"
 				"Enter selection: ";
 
 	cout << "**************************************\n"
@@ -34,12 +53,12 @@ int main()
 		//WHILE - exits when menu selection is EXIT
 		while(menuChoice != EXIT)
 		{
-			//IF - user adds to the list of animals
+			//IF - user adds to the list of members
 			if(menuChoice == ADD)
 			{
 				memberType = ValidateInput("Which member would you like to add Basic or Preferred (B/P): ", 'B','P');
 
-				// IF - animal is 'S' (Sheep)
+				// IF - member is 'B' (Basic)
 				if (memberType == 'B')
 				{
 					cout << "Enter your member\'s name: ";

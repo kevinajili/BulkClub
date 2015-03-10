@@ -1,5 +1,3 @@
-
-
 #include "Basic.h"
 
 /**************************************************************************
@@ -15,6 +13,7 @@ Basic::Basic()
 	id    = 0;
 	next  = NULL;
 	memberType = "";
+	purchasesTotal = 0;
 	membershipCost = 55.00;
 }
 
@@ -23,11 +22,12 @@ Basic::Basic(string memberName,
 			 int	  memberId,
 			 Date exDate)
 {
-	name = memberName;
-	id  = memberId;
-	next = NULL;
-	memberType = "Basic";
-	xDate = exDate;
+	name 		   = memberName;
+	id             = memberId;
+	next           = NULL;
+	memberType     = "Basic";
+	xDate          = exDate;
+	purchasesTotal = 0;
 }
 
 // Destructor - destroys an animal object
@@ -41,7 +41,15 @@ void Basic::SetAllValues(string memberName,
 	id   	   = memberId;
 	memberType = "Basic";
 }
+void Basic::AddPurchaseToList(purchase *dailyPurchase)
+{
+			// creating a new node for more info
+			dailyPurchase->next  = purchaseHistory;
+			purchaseHistory      = dailyPurchase;
+			purchasesTotal		+= (dailyPurchase->price * .0875);
+			dailyPurchase		 = NULL;
 
+}
 // INPUT - sets the animal type
 void Basic::SetMemberType(string member)
 {
@@ -49,12 +57,17 @@ void Basic::SetMemberType(string member)
 }
 void Basic::MembershipCost(string cost)
 {
-		membershipCost = cost;
+		membershipCost = atof(cost.c_str());
 }
 // INPUT - sets the next pointer
 void Basic::SetNext(Basic *nextNode)
 {
 	next = nextNode;
+}
+
+void Basic::SetPurchaseHistory(purchase *myPurchaseHistory)
+{
+	purchaseHistory = myPurchaseHistory;
 }
 
 // OUTPUT - gets the name
@@ -149,4 +162,8 @@ float Basic::MembershipAnnualCost(Date currentDate)
 	{
 		return membershipCost;
 	}
+}
+string Basic::GetMemberExpireDate()
+{
+	return xDate.DisplayDate();
 }

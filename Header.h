@@ -1,10 +1,3 @@
-/*
- * Header.h
- *
- *  Created on: Mar 5, 2015
- *      Author: Austin
- */
-
 #ifndef HEADER_H_
 #define HEADER_H_
 #include <iostream>
@@ -14,15 +7,6 @@
 #include <stdlib.h>
 #include "BulkClub.h"
 
-struct purchase
-{
-	Date   purchaseDate;
-	int    memberId;
-	string product;
-	float  price;
-	int    quantity;
-	purchase *next;
-};
 enum MenuOptions
 {
 	EXIT,		// User chooses to exit the program
@@ -46,4 +30,5 @@ char ValidateInput(const string CHAR_PROMPT,  // IN & CALC - Character prompt
 purchase *ReadInDailyPurchases(string date, purchase *head);
 
 BulkClub ReadInFromFile();
+BulkClub FromDailyPurchaseToMember(purchase *Day, BulkClub MyBulkClubList);
 #endif /* HEADER_H_ */

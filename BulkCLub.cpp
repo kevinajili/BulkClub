@@ -13,7 +13,7 @@ BulkClub::~BulkClub()
 	ClearList();
 }
 
-// INPUT - adds instance of animal to list
+// INPUT - adds instance of member to list
 void BulkClub::AddMember(Basic *newMember)
 {
 	newMember->SetNext(head);
@@ -23,7 +23,7 @@ void BulkClub::AddMember(Basic *newMember)
 
 }
 
-// INPUT - removes instance of animal from list
+// INPUT - removes instance of member from list
 bool BulkClub::RemoveMember(string searchKey)
 {
 	Basic *pointer;
@@ -107,7 +107,10 @@ Basic *BulkClub::FindMember(string searchKey) const
 	}
 	return pointer;
 }
-Basic *BulkClub::FindMember(int number) const
+
+
+// OUTPUT - searches list for specific name
+Basic *BulkClub::FindMember(int id) const
 {
 	Basic *pointer;
 	bool found;
@@ -115,7 +118,7 @@ Basic *BulkClub::FindMember(int number) const
 	pointer = head;
 	while(pointer != NULL && !found)
 	{
-		if(pointer->GetId() == number)
+		if(pointer->GetId() == id)
 		{
 			found = true;
 		}
@@ -124,11 +127,8 @@ Basic *BulkClub::FindMember(int number) const
 			pointer = pointer->GetNext();
 		}
 	}
-
-
 	return pointer;
 }
-
 
 // OUTPUT - returns count
 int BulkClub::TotalMembers() const

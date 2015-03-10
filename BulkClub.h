@@ -22,7 +22,7 @@ class BulkClub
 		 ***  ACCESSORS  ***
 		 *******************/
 		Basic *FindMember(int number) const;
-		Basic *FindMember(string searchKey) const;	// search for animal
+		Basic *FindMember(string searchKey) const;	// search for member
 		int    TotalMembers() const;		// returns count
 		string OutputList() const;		// outputs entire list - table format
 		Basic *FirstMember()const;	// outputs head of list

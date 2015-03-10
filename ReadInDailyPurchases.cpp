@@ -1,25 +1,24 @@
 #include "Header.h"
 purchase *ReadInDailyPurchases(string date, purchase *head)
 {
-	purchase dailyPurchase;
-	purchase *newNode;
+
+	purchase *dailyPurchase;
 	ifstream iFile;
 	Date 	 *exDate;
 	string   expireDate;
 	string 	 product;
 	int 	 memberId;
+	float    price;
+	int 	 quantity;
 	int 	 month;
 	int 	 day;
 	int      year;
-	int      price;
-	int 	 quantity;
-
 	// Initialization
 	iFile.open(date.c_str());
-	newNode = NULL;
+	dailyPurchase = new purchase;
 
 	//CALC - from file to linked list
-	while(!iFile.eof())
+	while(iFile)
 	{
 		//IN - Reading info into variables from the iFile;
 		getline(iFile, expireDate);
@@ -37,22 +36,29 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 		exDate  = new Date(month,day,year);
 
 		// struct assignment
-		dailyPurchase.purchaseDate = exDate;
-		dailyPurchase.memberId     = memberId;
-		dailyPurchase.product	   = product;
-		dailyPurchase.price		   = price;
-		dailyPurchase.quantity	   = quantity;
+		dailyPurchase->purchaseDate = *exDate;
+		dailyPurchase->memberId     = memberId;
+		dailyPurchase->product	    = product;
+		dailyPurchase->price		   = price;
+		dailyPurchase->quantity	   = quantity;
 
+		cout <<  dailyPurchase->purchaseDate.DisplayDate() << endl;
+		cout <<  dailyPurchase->memberId<< endl;
+		cout <<  dailyPurchase->product<< endl;
+		cout <<  dailyPurchase->price<< endl;
+		cout <<  dailyPurchase->quantity<< endl;
+		cout << endl;
 		// creating a new node for more info
-		newNode->next = head;
-		head 		  = newNode;
+		dailyPurchase->next = head;
+		head 	            = dailyPurchase;
+
+		dailyPurchase = new purchase;
+		delete exDate;
 	}
 
-	//deallocation of memory
-	exDate  = NULL;
-	newNode = NULL;
-	delete newNode;
-	delete exDate;
+
+	delete dailyPurchase;
+
 
 	return head;
 }
