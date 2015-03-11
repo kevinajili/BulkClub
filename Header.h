@@ -6,15 +6,16 @@
 #include <limits>
 #include <stdlib.h>
 #include "BulkClub.h"
-
+#include "Preferred.h"
 enum MenuOptions
 {
 	EXIT,		// User chooses to exit the program
-	ADD,		// User chooses to initialize values for an animal
-	REMOVE, 	// User chooses to change the age of the animal
-	DISPLAY_FIRST,
-	FIND,		// User chooses to change the value of the animal
+	ADD,		// User chooses to initialize values for an member
+	REMOVE, 	// User chooses to change the age of the member
+	FIND,		// User chooses to change the value of the member
 	LIST_SIZE,
+	CHANGE_STATUS,
+	CHANGE_MMEBEREXDATE,
 	OUTPUT,
 	CLEAR		// User chooses to display attributes to the screen
 };
@@ -29,6 +30,6 @@ char ValidateInput(const string CHAR_PROMPT,  // IN & CALC - Character prompt
 
 purchase *ReadInDailyPurchases(string date, purchase *head);
 
-BulkClub ReadInFromFile();
-BulkClub FromDailyPurchaseToMember(purchase *Day, BulkClub MyBulkClubList);
+BulkClub *ReadInFromFile(BulkClub   *list);
+void FromDailyPurchaseToMember(purchase *Day, BulkClub MyBulkClubList);
 #endif /* HEADER_H_ */

@@ -18,16 +18,18 @@ Basic::Basic()
 }
 
 // Non - default constructor - creates animal instance
-Basic::Basic(string memberName,
-			 int	  memberId,
-			 Date exDate)
+Basic::Basic(string 		 memberName,		//overloaded constructor
+			 int    		 memberNumber,
+			 string         memberType,
+			 Date			 memberExpDate,
+			 float			 memberTotSpent)
 {
 	name 		   = memberName;
-	id             = memberId;
+	id             = memberNumber;
 	next           = NULL;
 	memberType     = "Basic";
-	xDate          = exDate;
-	purchasesTotal = 0;
+	xDate          = memberExpDate;
+	purchasesTotal = memberTotSpent;
 }
 
 // Destructor - destroys an animal object

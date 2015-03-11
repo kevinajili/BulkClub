@@ -26,8 +26,11 @@ class Basic
 {
 	public:
 		Basic();									// constructor
-		Basic(string memberName,					// non-default constructor
-			   int    memberId, Date exDate);
+		Basic(string 		 memberName,		//overloaded constructor
+			  int    		 memberNumber,
+			  string         memberType,
+			  Date			 memberExpDate,
+			  float			 memberTotSpent);
 		~Basic();									// destructor
 		/******************
 		 ***  MUTATORS  ***

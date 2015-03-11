@@ -1,7 +1,7 @@
 #include "Header.h"
-BulkClub ReadInFromFile()
+BulkClub *ReadInFromFile(BulkClub   *list)
 {
-	BulkClub list;
+
 	int month;
 	int day;
 	int year;
@@ -30,14 +30,18 @@ while (!iFile.eof())
 	year  = atoi(expireDate.substr(6,9).c_str());
 
 	exDate    = new Date(month,day,year);
-	newMember = new Basic(memberName, memberId,*exDate);
-	list.AddMember(newMember);
-
-
+	if(membershipType == "Basic")
+	{
+	newMember = new Basic(memberName, memberId, membershipType, *exDate, 0.0);
+	}
+	else
+	{
+		newMember = new Preferred(memberName, memberId, membershipType, *exDate, 0.0, 0.0);
+	}
+	list->AddMember(newMember);
 }
 iFile.close();
-delete newMember;
-delete exDate;
+
 
 return list;
 }

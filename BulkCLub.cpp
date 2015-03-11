@@ -18,9 +18,7 @@ void BulkClub::AddMember(Basic *newMember)
 {
 	newMember->SetNext(head);
 	head = newMember;
-	newMember = NULL;
 	memberCount++;
-
 }
 
 // INPUT - removes instance of member from list
@@ -116,8 +114,10 @@ Basic *BulkClub::FindMember(int id) const
 	bool found;
 	found = false;
 	pointer = head;
+
 	while(pointer != NULL && !found)
 	{
+
 		if(pointer->GetId() == id)
 		{
 			found = true;
@@ -135,7 +135,54 @@ int BulkClub::TotalMembers() const
 {
 	return memberCount;
 }
+string OutputListHeader()
+{
+	ostringstream output;
+	const int 	  NAME_COL         = 20;
+	const int     MEM_ID_COL       = 10;
+	const int     MEM_TYPE_COL 	   = 20;
+	const int  	  MEM_EXP_DATE_COL = 30;
+	const int 	  TOT_SPENT_COL    = 15;
+	const int 	  REBTATE_AMT_COL  = 15;
+	output << left;
+	output << setw(NAME_COL)         << "Name";
+	output << setw(MEM_ID_COL)       << "ID";
+	output << setw(MEM_TYPE_COL) 	 << "Membership Type";
+	output << setw(MEM_EXP_DATE_COL) << "Membership Expiration Date";
+	output << setw(TOT_SPENT_COL)	 << "Total Spent";
+	output << setw(REBTATE_AMT_COL)  << "Rebate Amount";
+	output << endl;
 
+	output << setfill('-');
+	output << setw(4) << '-';
+	output << setfill(' ');
+	output << setw(16) << ' ';
+
+	output << setfill('-');
+	output << setw(2) << '-';
+	output << setfill(' ');
+	output << setw(8) << ' ';
+
+	output << setfill('-');
+	output << setw(16) << '-';
+	output << setfill(' ');
+	output << setw(4) << ' ';
+
+	output << setfill('-');
+	output << setw(26) << '-';
+	output << setfill(' ');
+	output << setw(4) << ' ';
+
+	output << setfill('-');
+	output << setw(11) << '-';
+	output << setfill(' ');
+	output << setw(4) << ' ';
+
+	output << setfill('-');
+	output << setw(13) << '-';
+	output << setfill(' ');
+	output << setw(2) << ' ';
+}
 // OUTPUT - outputs entire list in table format
 string BulkClub::OutputList() const
 {
@@ -147,38 +194,9 @@ string BulkClub::OutputList() const
 	Basic *pointer;
 
 	pointer = head;
-
-	if(memberCount == 1)
+	while(pointer != NULL)
 	{
-		output << pointer->Display();
-	}
-	else
-	{
-		// OUTPUT - Prints heading titles to the screen
-		output << left;
-		output << setw(Member_TYPE_WIDTH)  << "Member Type" << ' ';
-		output << setw(NAME_WIDTH)         << "NAME"   << ' ';
-		output << setw(ID_WIDTH)          << "ID"    << ' ';
-		output << endl;
-		// OUTPUT - Prints divider between heading and data to the screen
-		output << setfill('-');
-		output << setw(Member_TYPE_WIDTH)  << '-' << ' ';
-		output << setw(NAME_WIDTH)   	   << '-' << ' ';
-		output << setw(ID_WIDTH)    	   << '-' << ' ';
 
-		output << setfill(' ');
-		output << endl;
-		output << right;
-
-		while(pointer != NULL)
-		{
-			output << pointer->TableDisplay(Member_TYPE_WIDTH,
-											NAME_WIDTH,
-											ID_WIDTH);
-
-			output << endl;
-			pointer = pointer->GetNext();
-		}
 	}
 
 	return output.str();

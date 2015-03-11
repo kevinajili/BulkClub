@@ -1,8 +1,8 @@
 #include "Header.h"
 purchase *ReadInDailyPurchases(string date, purchase *head)
 {
-
 	purchase *dailyPurchase;
+	purchase *pointer;
 	ifstream iFile;
 	Date 	 *exDate;
 	string   expireDate;
@@ -32,32 +32,31 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 		// Creating a date
 		month 	= atoi(expireDate.substr(0,2).c_str());
 		day  	= atoi(expireDate.substr(3,2).c_str());
-		year 	= atoi(expireDate.substr(6,9).c_str());
+		year 	= atoi(expireDate.substr(6,4).c_str());
+
 		exDate  = new Date(month,day,year);
+
 
 		// struct assignment
 		dailyPurchase->purchaseDate = *exDate;
 		dailyPurchase->memberId     = memberId;
 		dailyPurchase->product	    = product;
-		dailyPurchase->price		   = price;
+		dailyPurchase->price		= price;
 		dailyPurchase->quantity	   = quantity;
 
-		cout <<  dailyPurchase->purchaseDate.DisplayDate() << endl;
-		cout <<  dailyPurchase->memberId<< endl;
-		cout <<  dailyPurchase->product<< endl;
-		cout <<  dailyPurchase->price<< endl;
-		cout <<  dailyPurchase->quantity<< endl;
-		cout << endl;
+
 		// creating a new node for more info
 		dailyPurchase->next = head;
 		head 	            = dailyPurchase;
 
+
+
 		dailyPurchase = new purchase;
-		delete exDate;
+
 	}
 
+	iFile.close();
 
-	delete dailyPurchase;
 
 
 	return head;
