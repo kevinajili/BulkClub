@@ -37,11 +37,13 @@ class Basic
 		 ******************/
 		void SetAllValues(string memberName,
   	   	   	   	 	 	  int    memberId);
+		void ChangeExpireDate();
 		void AddPurchaseToList(purchase *dailyPurchase);
 		void SetNext(Basic *nextNode);			    // sets the next pointer
 		void SetMemberType(string memberType); 		// sets the member type
 		void MembershipCost(string cost);			// sets the membership cost
 		void SetPurchaseHistory(purchase *myPurchaseHistoy);
+		void SetTotalSpent(float totalSpent);
 		/*******************
 		 ***  ACCESSORS  ***
 		 *******************/
@@ -57,6 +59,7 @@ class Basic
 		int    GetId()   const;  						// gets the Member type
 		void   GetNameAndId(string &memberName,
 							int    &memberId)  const;  // gets Member age
+		Date   GetDate() const;
 		string GetMemberType() const;
 		string StringConvert(int integer) const;   		// converts int to string
 		string Ellipsis(string inputStr,		   		// shortens long strings
@@ -72,6 +75,7 @@ class Basic
 		Date 	 xDate;		 		// expiration date
 		float    membershipCost;		// member ship cost
 		float    purchasesTotal;
+		float    purchaseNoTax;
 		purchase *purchaseHistory; 	// member purchase history
 };
 

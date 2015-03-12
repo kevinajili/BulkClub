@@ -25,18 +25,28 @@ void BulkClub::AddMember(Basic *newMember)
 bool BulkClub::RemoveMember(string searchKey)
 {
 	Basic *pointer;
+	Basic *pointer2;
+	Basic *pointer3;
 	bool  removed;
 	pointer = head;
 	// WHILE - not end of list & not removed
 	while(pointer != NULL && !removed)
 	{
 		// IF - name is found
-		if(pointer->GetName() == searchKey)
+		if(pointer->GetNext()->GetName() == searchKey)
+		{
+			pointer2 = pointer->GetNext();
+			pointer3 = pointer2->GetNext();
+			pointer->SetNext(pointer3);
+			delete pointer2;
+			removed = true;
+			memberCount--;
+		}
+		else if(pointer->GetName() == searchKey)
 		{
 			head = pointer->GetNext();
 			delete pointer;
 			removed = true;
-			memberCount--;
 		}
 		// ELSE - not found
 		else

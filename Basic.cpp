@@ -53,8 +53,8 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 			dailyPurchase->next  = purchaseHistory;
 			purchaseHistory      = dailyPurchase;
 			purchasesTotal		+= (dailyPurchase->price * .0875);
+			purchaseNoTax       += dailyPurchase->price;
 			dailyPurchase		 = NULL;
-
 }
 // INPUT - sets the animal type
 void Basic::SetMemberType(string member)
@@ -64,6 +64,10 @@ void Basic::SetMemberType(string member)
 void Basic::MembershipCost(string cost)
 {
 		membershipCost = atof(cost.c_str());
+}
+void Basic::SetTotalSpent(float totalSpent)
+{
+	purchasesTotal = totalSpent;
 }
 // INPUT - sets the next pointer
 void Basic::SetNext(Basic *nextNode)
@@ -98,7 +102,10 @@ void Basic::GetNameAndId(string &memberName,
 	memberName = name;
 	memberId  = id;
 }
-
+void Basic::ChangeExpireDate()
+{
+	xDate.AutoSetDate();
+}
 // OUTPUT - gets the next pointer
 Basic *Basic::GetNext() const
 {
@@ -140,7 +147,10 @@ string Basic::StringConvert(int integer) const
 
     return OUTPUT.str();
 }
-
+Date   Basic::GetDate() const
+{
+	return xDate;
+}
 // OUTPUT - returns modified string ready for output with "..."
 string Basic::Ellipsis(string inputStr,	//CALC - input string
 			    		int maxLength) const		//CALC - max length of one line
@@ -186,11 +196,11 @@ string Basic::OutputListing() const
 	output << setw(MEM_ID_COL)       << id;
 	output << setw(MEM_TYPE_COL)     << memberType;
 	output << setw(MEM_EXP_DATE_COL) << xDate.DisplayDate();
-	output << setw(TOT_SPENT_COL)	 << purchasesTotal;
+	output << setw(TOT_SPENT_COL)	 << fixed << setprecision(2)
+									 <<purchasesTotal;
 
 
 	return output.str();
-
 }
 string Basic::GetMemberExpireDate()
 {
