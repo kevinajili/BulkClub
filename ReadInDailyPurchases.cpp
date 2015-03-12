@@ -4,7 +4,7 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 	purchase *dailyPurchase;
 	purchase *pointer;
 	ifstream iFile;
-	Date 	 *exDate;
+	Date 	 exDate;
 	string   expireDate;
 	string 	 product;
 	int 	 memberId;
@@ -29,12 +29,12 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 		iFile >> quantity;
 		iFile.ignore(numeric_limits<streamsize>::max(), '\n');
 
-		// Creating a date
+		// Creating a date from file (01/01/2015 format)
 		month 	= atoi(expireDate.substr(0,2).c_str());
 		day  	= atoi(expireDate.substr(3,2).c_str());
 		year 	= atoi(expireDate.substr(6,4).c_str());
 
-		exDate  = new Date(month,day,year);
+		exDate.SetDate(month,day,year);
 
 
 		// struct assignment
@@ -49,11 +49,11 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 		dailyPurchase->next = head;
 		head 	            = dailyPurchase;
 
-
-
 		dailyPurchase = new purchase;
 
 	}
+
+	delete dailyPurchase;
 
 	iFile.close();
 
