@@ -46,14 +46,14 @@ class Basic
 		 ***  ACCESSORS  ***
 		 *******************/
 		 float MembershipAnnualCost(Date currentDate);
-		 string Display() const;	// displays the member details
+		 virtual string Display() const;	// displays the member details
 
 		 //TableDisplay() - outputs single row output ready for table
 		 string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
 		string GetName() const;							// gets the Member name
-		int GetId() const; 								// gets the Member type
+		int    GetId() const; 							// gets the Member type
 		void   GetNameAndId(string &memberName,
 							 int    &memberId)  const;  // gets Member age
 		string GetMemberType() const;
@@ -64,7 +64,7 @@ class Basic
 														// to next Member
 		string GetMemberExpireDate();
 	private:
-		string   name;	     							// Member name
+		string   name;	     		  // Member name
 		int      id;	     	 		// Member age
 		Basic    *next;		 		// pointer to next Member
 		string   memberType;  		// the type of Member

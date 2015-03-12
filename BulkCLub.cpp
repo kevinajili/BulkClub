@@ -54,9 +54,11 @@ bool BulkClub::RemoveMember(string searchKey)
 // OUTPUT - outputs head of list
 Basic *BulkClub::FirstMember()const
 {
-	Basic *pointer;
-	pointer = head;
-	return pointer;
+//	Basic *pointer;     ***Austin- I changed this to something simpler...
+//	pointer = head;					keep the change if you want to
+//	return pointer;
+
+	return head;
 }
 
 // CALC - deletes entire list
