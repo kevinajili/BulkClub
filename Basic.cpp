@@ -15,21 +15,25 @@ Basic::Basic()
 	memberType = "";
 	purchasesTotal = 0;
 	membershipCost = 55.00;
+	purchaseHistory = NULL;
+	xDate.AutoSetDate();
 }
 
 // Non - default constructor - creates animal instance
 Basic::Basic(string 		 memberName,		//overloaded constructor
 			 int    		 memberNumber,
-			 string         memberType,
+			 string          membershipType,
 			 Date			 memberExpDate,
 			 float			 memberTotSpent)
 {
 	name 		   = memberName;
 	id             = memberNumber;
 	next           = NULL;
-	memberType     = "Basic";
+	memberType     = membershipType;
+	membershipCost = 55.00;
 	xDate          = memberExpDate;
 	purchasesTotal = memberTotSpent;
+	purchaseHistory =NULL;
 }
 
 // Destructor - destroys an animal object
@@ -164,8 +168,31 @@ float Basic::MembershipAnnualCost(Date currentDate)
 	{
 		return membershipCost;
 	}
+	return membershipCost;
+}
+string Basic::OutputListing() const
+{
+	ostringstream output;
+	const int 	  NAME_COL         = 25;
+	const int     MEM_ID_COL       = 10;
+	const int     MEM_TYPE_COL 	   = 20;
+	const int  	  MEM_EXP_DATE_COL = 30;
+	const int 	  TOT_SPENT_COL    = 15;
+	const int 	  REBTATE_AMT_COL  = 15;
+
+	output << left;
+
+	output << setw(NAME_COL)         << name;
+	output << setw(MEM_ID_COL)       << id;
+	output << setw(MEM_TYPE_COL)     << memberType;
+	output << setw(MEM_EXP_DATE_COL) << xDate.DisplayDate();
+	output << setw(TOT_SPENT_COL)	 << purchasesTotal;
+
+
+	return output.str();
+
 }
 string Basic::GetMemberExpireDate()
 {
-	return xDate.DisplayDate();
+	    return xDate.DisplayDate();
 }

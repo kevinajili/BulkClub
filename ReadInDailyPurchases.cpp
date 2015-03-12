@@ -2,7 +2,6 @@
 purchase *ReadInDailyPurchases(string date, purchase *head)
 {
 	purchase *dailyPurchase;
-	purchase *pointer;
 	ifstream iFile;
 	Date 	 *exDate;
 	string   expireDate;

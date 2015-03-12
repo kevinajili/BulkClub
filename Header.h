@@ -15,6 +15,7 @@ enum MenuOptions
 	FIND,		// User chooses to change the value of the member
 	LIST_SIZE,
 	CHANGE_STATUS,
+	FIRST_MEMBER,
 	CHANGE_MMEBEREXDATE,
 	OUTPUT,
 	CLEAR		// User chooses to display attributes to the screen

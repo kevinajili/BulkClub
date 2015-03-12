@@ -28,7 +28,7 @@ class Basic
 		Basic();									// constructor
 		Basic(string 		 memberName,		//overloaded constructor
 			  int    		 memberNumber,
-			  string         memberType,
+			  string         membershipType,
 			  Date			 memberExpDate,
 			  float			 memberTotSpent);
 		~Basic();									// destructor
@@ -52,10 +52,11 @@ class Basic
 		 string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
+		string OutputListing()const;
 		string GetName() const;							// gets the Member name
-		int GetId() const; 								// gets the Member type
+		int    GetId()   const;  						// gets the Member type
 		void   GetNameAndId(string &memberName,
-							 int    &memberId)  const;  // gets Member age
+							int    &memberId)  const;  // gets Member age
 		string GetMemberType() const;
 		string StringConvert(int integer) const;   		// converts int to string
 		string Ellipsis(string inputStr,		   		// shortens long strings
