@@ -33,7 +33,7 @@ public:
     void SetDate(int month,
                  int day,
                  int year);
-
+    void AutoSetDate();
     /******************************************************
         ACCESSORS
      ******************************************************/

@@ -89,7 +89,29 @@ string Date::DisplayDate() const
 
     return output.str();
 }
+void Date::AutoSetDate()
+{
+	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int currentYear;
+	int currentMonth;
+	int currentDay;
+	int lastDayInMonth;
+	tm *currentTime;     // Used to find the current time
 
+	// Find the current year based on the currentTime
+	time_t now  = time(0);
+	currentTime  = localtime(&now);
+	currentYear  = 1900 + currentTime->tm_year;
+	currentMonth = 1 + currentTime->tm_mon;
+	currentDay   = currentTime->tm_mday;
+
+	currentYear++;
+	// Set the Date (if it is valid)
+	dateMonth = currentMonth;
+	dateDay   = currentDay;
+	dateYear  = currentYear;
+
+}
 
 
 

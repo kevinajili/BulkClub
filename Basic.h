@@ -28,7 +28,7 @@ class Basic
 		Basic();									// constructor
 		Basic(string 		 memberName,		//overloaded constructor
 			  int    		 memberNumber,
-			  string         memberType,
+			  string         membershipType,
 			  Date			 memberExpDate,
 			  float			 memberTotSpent);
 		~Basic();									// destructor
@@ -37,25 +37,29 @@ class Basic
 		 ******************/
 		void SetAllValues(string memberName,
   	   	   	   	 	 	  int    memberId);
+		void ChangeExpireDate();
 		void AddPurchaseToList(purchase *dailyPurchase);
 		void SetNext(Basic *nextNode);			    // sets the next pointer
 		void SetMemberType(string memberType); 		// sets the member type
 		void MembershipCost(string cost);			// sets the membership cost
 		void SetPurchaseHistory(purchase *myPurchaseHistoy);
+		void SetTotalSpent(float totalSpent);
 		/*******************
 		 ***  ACCESSORS  ***
 		 *******************/
 		 float MembershipAnnualCost(Date currentDate);
-		 virtual string Display() const;	// displays the member details
+		 string Display() const;	// displays the member details
 
 		 //TableDisplay() - outputs single row output ready for table
 		 string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
+		string OutputListing()const;
 		string GetName() const;							// gets the Member name
-		int    GetId() const; 							// gets the Member type
+		int    GetId()   const;  						// gets the Member type
 		void   GetNameAndId(string &memberName,
-							 int    &memberId)  const;  // gets Member age
+							int    &memberId)  const;  // gets Member age
+		Date   GetDate() const;
 		string GetMemberType() const;
 		string StringConvert(int integer) const;   		// converts int to string
 		string Ellipsis(string inputStr,		   		// shortens long strings
@@ -64,13 +68,14 @@ class Basic
 														// to next Member
 		string GetMemberExpireDate();
 	private:
-		string   name;	     		  // Member name
+		string   name;	     							// Member name
 		int      id;	     	 		// Member age
 		Basic    *next;		 		// pointer to next Member
 		string   memberType;  		// the type of Member
 		Date 	 xDate;		 		// expiration date
 		float    membershipCost;		// member ship cost
 		float    purchasesTotal;
+		float    purchaseNoTax;
 		purchase *purchaseHistory; 	// member purchase history
 };
 

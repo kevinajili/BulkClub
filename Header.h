@@ -15,8 +15,11 @@ enum MenuOptions
 	FIND,		// User chooses to change the value of the member
 	LIST_SIZE,
 	CHANGE_STATUS,
+	FIRST_MEMBER,
 	CHANGE_MMEBEREXDATE,
 	OUTPUT,
+	OUTPUT_PURCHASES_BYCUSTOMER,
+	SEARCH_BY_ITEM_SOLD,
 	CLEAR		// User chooses to display attributes to the screen
 };
 
@@ -31,5 +34,6 @@ char ValidateInput(const string CHAR_PROMPT,  // IN & CALC - Character prompt
 purchase *ReadInDailyPurchases(string date, purchase *head);
 
 BulkClub *ReadInFromFile(BulkClub   *list);
-void FromDailyPurchaseToMember(purchase *Day, BulkClub MyBulkClubList);
+string FromDailyPurchaseToMember(purchase *Day, Basic *memberPtr );
+void PurchaseInfoToMember(purchase *Day, BulkClub *list);
 #endif /* HEADER_H_ */
