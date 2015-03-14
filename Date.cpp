@@ -89,6 +89,33 @@ string Date::DisplayDate() const
 
     return output.str();
 }
+
+bool Date::CompareDate(Date purchase)
+{
+	bool valid;
+	valid = false;
+	if (dateYear == purchase.GetYear())   // note this-> is not needed
+		{
+			if (dateMonth == purchase.GetMonth())
+			{
+				valid =  dateDay >= purchase.GetDay();
+			}
+			else
+			{
+				valid =  dateMonth > purchase.GetMonth();
+			}
+		}
+
+	else if(dateYear > purchase.GetYear())
+	{
+		valid = dateYear > purchase.GetYear();
+	}
+	else
+	{
+		valid = dateYear == purchase.GetYear();
+	}
+
+}
 void Date::AutoSetDate()
 {
 	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};

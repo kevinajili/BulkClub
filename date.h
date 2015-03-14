@@ -43,7 +43,7 @@ public:
     int  GetYear()  const;
     int  GetMonth() const;
     int  GetDay()   const;
-
+    bool CompareDate(Date purchase);
     // Displays in MM/DD/YYYY format
     string DisplayDate() const;
 

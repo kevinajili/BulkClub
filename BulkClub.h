@@ -21,11 +21,11 @@ class BulkClub
 		/*******************
 		 ***  ACCESSORS  ***
 		 *******************/
-		Basic *FindMember(int number) const;
-		Basic *FindMember(string searchKey) const;	// search for member
+		Basic  *FindMember(int number) const;
+		Basic  *FindMember(string searchKey) const;	// search for member
 		int    TotalMembers() const;		// returns count
 		string OutputList() const;		// outputs entire list - table format
-		Basic *FirstMember()const;	// outputs head of list
+		Basic  *FirstMember()const;	// outputs head of list
 
 	private:
 		Basic *head;			// pointer to head of list

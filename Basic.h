@@ -15,23 +15,23 @@ using namespace std;
  *******************************************************************************/
 struct purchase
 {
-	Date   purchaseDate;
-	int    memberId;
-	string product;
-	float  price;
-	int    quantity;
+	Date      purchaseDate;
+	int       memberId;
+	string    product;
+	float     price;
+	int    	  quantity;
 	purchase *next;
 };
 class Basic
 {
 	public:
 		Basic();									// constructor
-		Basic(string 		 memberName,		//overloaded constructor
+		Basic(string 		 memberName,		    //overloaded constructor
 			  int    		 memberNumber,
 			  string         membershipType,
 			  Date			 memberExpDate,
 			  float			 memberTotSpent);
-		~Basic();									// destructor
+		~Basic();								   	// destructor
 		/******************
 		 ***  MUTATORS  ***
 		 ******************/
@@ -54,6 +54,7 @@ class Basic
 		 string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
+		string outputPurchaseDisplay() const;
 		string OutputListing()const;
 		string GetName() const;							// gets the Member name
 		int    GetId()   const;  						// gets the Member type
@@ -68,12 +69,12 @@ class Basic
 														// to next Member
 		string GetMemberExpireDate();
 	private:
-		string   name;	     							// Member name
-		int      id;	     	 		// Member age
+		string   name;	     		// Member name
+		int      id;	     	 	// Member age
 		Basic    *next;		 		// pointer to next Member
 		string   memberType;  		// the type of Member
 		Date 	 xDate;		 		// expiration date
-		float    membershipCost;		// member ship cost
+		float    membershipCost;	// member ship cost
 		float    purchasesTotal;
 		float    purchaseNoTax;
 		purchase *purchaseHistory; 	// member purchase history

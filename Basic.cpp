@@ -53,7 +53,7 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 			// creating a new node for more info
 			dailyPurchase->next  = purchaseHistory;
 			purchaseHistory      = dailyPurchase;
-			purchasesTotal		+= (dailyPurchase->price * .0875);
+			purchasesTotal		+= (dailyPurchase->price + (dailyPurchase->price * .0875));
 			purchaseNoTax       += dailyPurchase->price;
 			dailyPurchase		 = NULL;
 }
@@ -180,6 +180,28 @@ float Basic::MembershipAnnualCost(Date currentDate)
 		return membershipCost;
 	}
 	return membershipCost;
+}
+string Basic::outputPurchaseDisplay() const
+{
+	ostringstream output;
+	purchase *ptr;
+	float 	purchase;
+	ptr = purchaseHistory;
+	while(ptr != NULL)
+	{
+			output << left;
+			output << setw(20) << ptr->purchaseDate.DisplayDate();
+			output << setw(40) << ptr->product;
+			output << setw(10) <<  ptr->price;
+			output << setw(10) <<  ptr->quantity	<< endl;
+			purchase += 	(ptr->price * ptr->quantity)
+							+ ((ptr->price * ptr->quantity) * .0875);
+			ptr = ptr->next;
+	}
+
+
+
+	return output.str();
 }
 string Basic::OutputListing() const
 {

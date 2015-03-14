@@ -1,8 +1,12 @@
 #include "Header.h"
-purchase *ReadInDailyPurchases(string date, purchase *head)
+void ReadInDailyPurchases(string date, BulkClub *list)
 {
 	purchase *dailyPurchase;
 	ifstream iFile;
+	Basic	 *member;
+	bool 	 validQuanity;
+	bool 	 validTotal;
+	bool	 validPurchase;
 	Date 	 *exDate;
 	string   expireDate;
 	string 	 product;
@@ -12,13 +16,17 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 	int 	 month;
 	int 	 day;
 	int      year;
+
 	// Initialization
 	iFile.open(date.c_str());
 	dailyPurchase = new purchase;
 
+
 	//CALC - from file to linked list
 	while(iFile)
 	{
+		//Sets member to the top of the list
+		member        = list->FirstMember();
 		//IN - Reading info into variables from the iFile;
 		getline(iFile, expireDate);
 		iFile >> memberId;
@@ -40,17 +48,27 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 		dailyPurchase->purchaseDate = *exDate;
 		dailyPurchase->memberId     = memberId;
 		dailyPurchase->product	    = product;
+
 		dailyPurchase->price		= price;
-		dailyPurchase->quantity	   = quantity;
-
-
-		// creating a new node for more info
-		dailyPurchase->next = head;
-		head 	            = dailyPurchase;
+		dailyPurchase->quantity	    = quantity;
 
 
 
+		validTotal  = (dailyPurchase->price * dailyPurchase->quantity) <= 200;
+	while(member!= NULL)
+		{
+
+
+		if(member->GetDate().CompareDate(*exDate) && validTotal && member->GetId() == dailyPurchase->memberId)
+		{
+				member->AddPurchaseToList(dailyPurchase);
+
+		}
+			member = member->GetNext();
+
+		}
 		dailyPurchase = new purchase;
+
 
 	}
 
@@ -58,7 +76,7 @@ purchase *ReadInDailyPurchases(string date, purchase *head)
 
 
 
-	return head;
+
 }
 
 

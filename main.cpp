@@ -9,36 +9,38 @@ int main()
 	Preferred  *memberPtrP;
 	string      name;			// IN & OUT   - name of members
 	int         id;				// IN & OUT   - age of members
+	int 	    monthSearch;
 	bool        found;			// CALC 	  - determines if remove success
 	MenuOptions menuChoice;		// CALC 	  - user menu choice
 	char		memberType;		// IN         - used to input
 	char 		searchOp;       //
 	Date		newXDate;
+	string	    searchItem;
 	dayOne   = NULL;
 	list 	 = NULL;
     list = new BulkClub;
 
 	list     = ReadInFromFile(list);
-	dayOne   = ReadInDailyPurchases("day1.txt", dayOne);
-	dayOne   = ReadInDailyPurchases("day2.txt", dayOne);
-	dayOne   = ReadInDailyPurchases("day3.txt", dayOne);
-	dayOne   = ReadInDailyPurchases("day4.txt", dayOne);
-	dayOne   = ReadInDailyPurchases("day5.txt", dayOne);
-	PurchaseInfoToMember(dayOne, list);
+	 ReadInDailyPurchases("day1.txt", list);
+	 ReadInDailyPurchases("day2.txt",  list);
+	 ReadInDailyPurchases("day3.txt",  list);
+	 ReadInDailyPurchases("day4.txt",  list);
+	 ReadInDailyPurchases("day5.txt",  list);
 
 	const string MENU_PROMPT =
 								"Bulk Club Menu\n"
 								"1  - Add Member \n"
 								"2  - Remove Member\n"
-								"3  - Find Member\n"
-								"4  - List Size\n"
-								"5  - Change status\n"
-								"6  - First member\n"
-								"7  - Member expiration date\n"
-								"8  - Output List\n"
-								"9  - View a customers purchase history\n"
-								"10 - Search By Item\n"
-								"11 - Clear List\n"
+								"3  - Search for member expiration Date\n"
+								"4  - Find Member\n"
+								"5  - List Size\n"
+								"6  - Change status\n"
+								"7  - First member\n"
+								"8  - Member expiration date\n"
+								"9  - Output List\n"
+								"10 - View a customers purchase history\n"
+								"11 - Search By Item\n"
+								"12 - Clear List\n"
 								"0  - EXIT\n"
 								"Enter selection: ";
 	const string MENU_OUTPUT= 	"Output Menu\n"
@@ -107,7 +109,12 @@ int main()
 					}
 					cout << endl;
 					break;
+				case SEARCH_FOR_EXP_DATE:
+					cout << "Enter in a two digit month to search with: ";
+					cin  >> monthSearch;
 
+					cout << SearchForExpirationDate(monthSearch,list);
+							break;
 				case FIND :
 					searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
 					if(searchOp == 'N')
@@ -230,14 +237,13 @@ int main()
 								break;
 				case OUTPUT :
 
-								cout <<
 
 								cout << "Bulk Club Members:\n";
 					            cout << list->OutputList();
 								cout << endl;
 								break;
 				case OUTPUT_PURCHASES_BYCUSTOMER:
-					searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
+					                    searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
 										if(searchOp == 'N')
 										{
 											cout << "Enter the member\'s name: ";
@@ -245,7 +251,7 @@ int main()
 											memberPtr = list->FindMember(name);
 											if(memberPtr != NULL)
 											{
-												cout << FromDailyPurchaseToMember(dayOne,memberPtr);
+												cout << FromDailyPurchaseToMember(memberPtr);
 											}
 											else
 											{
@@ -260,7 +266,7 @@ int main()
 											memberPtr = list->FindMember(id);
 											if(memberPtr != NULL)
 											{
-												cout << FromDailyPurchaseToMember(dayOne,memberPtr);
+												cout << FromDailyPurchaseToMember(memberPtr);
 											}
 											else
 											{
@@ -273,6 +279,10 @@ int main()
 								list->ClearList();
 								cout << "List cleared.\n\n";
 								break;
+
+				case SEARCH_BY_ITEM_SOLD:
+								cout << "Search By item sold\n";
+								getline(cin, searchItem);
 
 
 				case EXIT:
