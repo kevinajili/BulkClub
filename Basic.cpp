@@ -15,21 +15,26 @@ Basic::Basic()
 	memberType = "";
 	purchasesTotal = 0;
 	membershipCost = 55.00;
+	purchaseHistory = NULL;
+	xDate.AutoSetDate();
+	purchaseNoTax = 0;
 }
 
 // Non - default constructor - creates animal instance
 Basic::Basic(string 		 memberName,		//overloaded constructor
 			 int    		 memberNumber,
-			 string         memberType,
+			 string          membershipType,
 			 Date			 memberExpDate,
 			 float			 memberTotSpent)
 {
 	name 		   = memberName;
 	id             = memberNumber;
 	next           = NULL;
-	memberType     = "Basic";
+	memberType     = membershipType;
+	membershipCost = 55.00;
 	xDate          = memberExpDate;
 	purchasesTotal = memberTotSpent;
+	purchaseHistory =NULL;
 }
 
 // Destructor - destroys an animal object
@@ -48,9 +53,9 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 			// creating a new node for more info
 			dailyPurchase->next  = purchaseHistory;
 			purchaseHistory      = dailyPurchase;
-			purchasesTotal		+= (dailyPurchase->price * .0875);
+			purchasesTotal		+= (dailyPurchase->price + (dailyPurchase->price * .0875));
+			purchaseNoTax       += dailyPurchase->price;
 			dailyPurchase		 = NULL;
-
 }
 // INPUT - sets the animal type
 void Basic::SetMemberType(string member)
@@ -60,6 +65,10 @@ void Basic::SetMemberType(string member)
 void Basic::MembershipCost(string cost)
 {
 		membershipCost = atof(cost.c_str());
+}
+void Basic::SetTotalSpent(float totalSpent)
+{
+	purchasesTotal = totalSpent;
 }
 // INPUT - sets the next pointer
 void Basic::SetNext(Basic *nextNode)
@@ -94,7 +103,10 @@ void Basic::GetNameAndId(string &memberName,
 	memberName = name;
 	memberId  = id;
 }
-
+void Basic::ChangeExpireDate()
+{
+	xDate.AutoSetDate();
+}
 // OUTPUT - gets the next pointer
 Basic *Basic::GetNext() const
 {
@@ -136,7 +148,10 @@ string Basic::StringConvert(int integer) const
 
     return OUTPUT.str();
 }
-
+Date   Basic::GetDate() const
+{
+	return xDate;
+}
 // OUTPUT - returns modified string ready for output with "..."
 string Basic::Ellipsis(string inputStr,	//CALC - input string
 			    		int maxLength) const		//CALC - max length of one line
@@ -164,8 +179,53 @@ float Basic::MembershipAnnualCost(Date currentDate)
 	{
 		return membershipCost;
 	}
+	return membershipCost;
+}
+string Basic::outputPurchaseDisplay() const
+{
+	ostringstream output;
+	purchase *ptr;
+	float 	purchase;
+	ptr = purchaseHistory;
+	while(ptr != NULL)
+	{
+			output << left;
+			output << setw(20) << ptr->purchaseDate.DisplayDate();
+			output << setw(40) << ptr->product;
+			output << setw(10) <<  ptr->price;
+			output << setw(10) <<  ptr->quantity	<< endl;
+			purchase += 	(ptr->price * ptr->quantity)
+							+ ((ptr->price * ptr->quantity) * .0875);
+			ptr = ptr->next;
+	}
+
+
+
+	return output.str();
+}
+string Basic::OutputListing() const
+{
+	ostringstream output;
+	const int 	  NAME_COL         = 25;
+	const int     MEM_ID_COL       = 10;
+	const int     MEM_TYPE_COL 	   = 20;
+	const int  	  MEM_EXP_DATE_COL = 30;
+	const int 	  TOT_SPENT_COL    = 15;
+	const int 	  REBTATE_AMT_COL  = 15;
+
+	output << left;
+
+	output << setw(NAME_COL)         << name;
+	output << setw(MEM_ID_COL)       << id;
+	output << setw(MEM_TYPE_COL)     << memberType;
+	output << setw(MEM_EXP_DATE_COL) << xDate.DisplayDate();
+	output << setw(TOT_SPENT_COL)	 << fixed << setprecision(2)
+									 <<purchasesTotal;
+
+
+	return output.str();
 }
 string Basic::GetMemberExpireDate()
 {
-	return xDate.DisplayDate();
+	    return xDate.DisplayDate();
 }

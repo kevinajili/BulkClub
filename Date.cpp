@@ -90,6 +90,55 @@ string Date::DisplayDate() const
     return output.str();
 }
 
+bool Date::CompareDate(Date purchase)
+{
+	bool valid;
+	valid = false;
+	if (dateYear == purchase.GetYear())   // note this-> is not needed
+		{
+			if (dateMonth == purchase.GetMonth())
+			{
+				valid =  dateDay >= purchase.GetDay();
+			}
+			else
+			{
+				valid =  dateMonth > purchase.GetMonth();
+			}
+		}
+
+	else if(dateYear > purchase.GetYear())
+	{
+		valid = dateYear > purchase.GetYear();
+	}
+	else
+	{
+		valid = dateYear == purchase.GetYear();
+	}
+
+}
+void Date::AutoSetDate()
+{
+	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int currentYear;
+	int currentMonth;
+	int currentDay;
+	int lastDayInMonth;
+	tm *currentTime;     // Used to find the current time
+
+	// Find the current year based on the currentTime
+	time_t now  = time(0);
+	currentTime  = localtime(&now);
+	currentYear  = 1900 + currentTime->tm_year;
+	currentMonth = 1 + currentTime->tm_mon;
+	currentDay   = currentTime->tm_mday;
+
+	currentYear++;
+	// Set the Date (if it is valid)
+	dateMonth = currentMonth;
+	dateDay   = currentDay;
+	dateYear  = currentYear;
+
+}
 
 
 

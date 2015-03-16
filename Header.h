@@ -12,11 +12,15 @@ enum MenuOptions
 	EXIT,		// User chooses to exit the program
 	ADD,		// User chooses to initialize values for an member
 	REMOVE, 	// User chooses to change the age of the member
+	SEARCH_FOR_EXP_DATE,
 	FIND,		// User chooses to change the value of the member
 	LIST_SIZE,
 	CHANGE_STATUS,
+	FIRST_MEMBER,
 	CHANGE_MMEBEREXDATE,
 	OUTPUT,
+	OUTPUT_PURCHASES_BYCUSTOMER,
+	SEARCH_BY_ITEM_SOLD,
 	CLEAR		// User chooses to display attributes to the screen
 };
 
@@ -28,8 +32,8 @@ char ValidateInput(const string CHAR_PROMPT,  // IN & CALC - Character prompt
 		      	   const char   FIRST_CHAR,   // IN & CALC - Valid character
 		           const char   SECOND_CHAR);  // IN & CALC - Valid character
 
-purchase *ReadInDailyPurchases(string date, purchase *head);
-
+void     ReadInDailyPurchases(string date, BulkClub *list);
 BulkClub *ReadInFromFile(BulkClub   *list);
-void FromDailyPurchaseToMember(purchase *Day, BulkClub MyBulkClubList);
+string   FromDailyPurchaseToMember(Basic *memberPtr );
+string   SearchForExpirationDate (int month,BulkClub *list);
 #endif /* HEADER_H_ */

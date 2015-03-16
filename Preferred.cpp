@@ -1,7 +1,7 @@
 #include "Preferred.h"
 Preferred::Preferred()
 {
-
+	rebate = .06;
 }
 Preferred::Preferred(string 		 memberName,		//overloaded constructor
 					  int    		 memberNumber,
@@ -11,10 +11,10 @@ Preferred::Preferred(string 		 memberName,		//overloaded constructor
 					  float			 memberRebate)
    :Basic(memberName,memberNumber,memberType, memberExpDate, memberTotSpent)
 {
-
+	rebate = .06;
 }
 
-
+Preferred::~Preferred(){}
 	/**********************************************************************
 	 * MUTATORS
 	 **********************************************************************/
@@ -38,5 +38,5 @@ Preferred::Preferred(string 		 memberName,		//overloaded constructor
 
 	float Preferred::GetRebate() const
 	{
-
+		return rebate;
 	}

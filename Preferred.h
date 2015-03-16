@@ -17,7 +17,7 @@ public:
 			  Date			 memberExpDate,
 			  float			 memberTotSpent,
 			  float			 memberRebate);
-
+	~Preferred();
 
 	/**********************************************************************
 	 * MUTATORS
@@ -32,14 +32,13 @@ public:
 
 	void  SetRebate(float memberRebate);		   //Sets the value for rebate
 
-//	virtual void UpdateMember()  //NEED TO ADD
 
 	/**********************************************************************
 	 * ACCESSORS
 	 **********************************************************************/
 	float GetRebate() const;				   //Returns the value for rebate
 
-//	virtual void Print() const; //NEED TO ADD
+
 private:
 
 	float rebate;

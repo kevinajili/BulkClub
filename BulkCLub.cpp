@@ -25,18 +25,28 @@ void BulkClub::AddMember(Basic *newMember)
 bool BulkClub::RemoveMember(string searchKey)
 {
 	Basic *pointer;
+	Basic *pointer2;
+	Basic *pointer3;
 	bool  removed;
 	pointer = head;
 	// WHILE - not end of list & not removed
 	while(pointer != NULL && !removed)
 	{
 		// IF - name is found
-		if(pointer->GetName() == searchKey)
+		if(pointer->GetNext()->GetName() == searchKey)
+		{
+			pointer2 = pointer->GetNext();
+			pointer3 = pointer2->GetNext();
+			pointer->SetNext(pointer3);
+			delete pointer2;
+			removed = true;
+			memberCount--;
+		}
+		else if(pointer->GetName() == searchKey)
 		{
 			head = pointer->GetNext();
 			delete pointer;
 			removed = true;
-			memberCount--;
 		}
 		// ELSE - not found
 		else
@@ -54,11 +64,9 @@ bool BulkClub::RemoveMember(string searchKey)
 // OUTPUT - outputs head of list
 Basic *BulkClub::FirstMember()const
 {
-//	Basic *pointer;     ***Austin- I changed this to something simpler...
-//	pointer = head;					keep the change if you want to
-//	return pointer;
-
-	return head;
+	Basic *pointer;
+	pointer = head;
+	return pointer;
 }
 
 // CALC - deletes entire list
@@ -140,7 +148,7 @@ int BulkClub::TotalMembers() const
 string OutputListHeader()
 {
 	ostringstream output;
-	const int 	  NAME_COL         = 20;
+	const int 	  NAME_COL         = 25;
 	const int     MEM_ID_COL       = 10;
 	const int     MEM_TYPE_COL 	   = 20;
 	const int  	  MEM_EXP_DATE_COL = 30;
@@ -158,7 +166,7 @@ string OutputListHeader()
 	output << setfill('-');
 	output << setw(4) << '-';
 	output << setfill(' ');
-	output << setw(16) << ' ';
+	output << setw(21) << ' ';
 
 	output << setfill('-');
 	output << setw(2) << '-';
@@ -184,21 +192,22 @@ string OutputListHeader()
 	output << setw(13) << '-';
 	output << setfill(' ');
 	output << setw(2) << ' ';
+	output << endl;
+	return output.str();
 }
 // OUTPUT - outputs entire list in table format
 string BulkClub::OutputList() const
 {
-	const int NAME_WIDTH   = 10;
-	const int ID_WIDTH    = 3;
-	const int Member_TYPE_WIDTH  = 6;
+
 
  	ostringstream output;
 	Basic *pointer;
-
+	output << OutputListHeader();
 	pointer = head;
 	while(pointer != NULL)
 	{
-
+		output << pointer->OutputListing() << endl;
+		pointer = pointer -> GetNext();
 	}
 
 	return output.str();
