@@ -38,22 +38,38 @@ class Basic
 		void SetAllValues(string memberName,
   	   	   	   	 	 	  int    memberId);
 		void ChangeExpireDate();
+		void SetDailyQuantity(int amount);
 		void AddPurchaseToList(purchase *dailyPurchase);
 		void SetNext(Basic *nextNode);			    // sets the next pointer
 		void SetMemberType(string memberType); 		// sets the member type
 		void MembershipCost(string cost);			// sets the membership cost
 		void SetPurchaseHistory(purchase *myPurchaseHistoy);
 		void SetTotalSpent(float totalSpent);
+		void SetNameAndId(string &memberName,
+							int    &memberId)  const;  // gets Member age
+
 		/*******************
 		 ***  ACCESSORS  ***
 		 *******************/
-		 float MembershipAnnualCost(Date currentDate);
-		 string Display() const;	// displays the member details
+		Basic *GetNext()               const;		// return pointer to
+												    // to next Member
+		Date   GetDate() const;
+		float  MembershipAnnualCost(Date currentDate);
+		float  GetTotalPurchase()const;
+		float  GetTotalPurchaseNoTax() const;
 
 		 //TableDisplay() - outputs single row output ready for table
-		 string TableDisplay(const int MEMBERSHIP_WIDTH,
+		int    GetId()   const;  						// gets the Member type
+		purchase *GetPurchaseHead();
+		string   Display() const;	              // displays the member details
+		string GetMemberType() const;
+		string StringConvert(int integer) const;  // converts int to string
+		string Ellipsis(string inputStr,		  // shortens long strings
+						int maxLength) const;	  // with "..."
+		string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
+<<<<<<< HEAD
 		string OutputPurchaseDisplay() const;
 		string OutputListing()const;
 		string GetName() const;							// gets the Member name
@@ -67,17 +83,24 @@ class Basic
 					    int maxLength) const;	   		// with "..."
 		Basic *GetNext() const;							// return pointer to
 														// to next Member
+=======
+		string outputPurchaseDisplay() const;
+		string OutputListing()         const;
+		string GetName()     		   const;		// gets the Member name
+>>>>>>> master
 		string GetMemberExpireDate();
 	private:
-		string   name;	     		// Member name
-		int      id;	     	 	// Member age
 		Basic    *next;		 		// pointer to next Member
-		string   memberType;  		// the type of Member
 		Date 	 xDate;		 		// expiration date
 		float    membershipCost;	// member ship cost
+		float    maxDailyPurchase;
 		float    purchasesTotal;
 		float    purchaseNoTax;
+		int      id;	     	 	// Member age
+		int 	 quantityPerDay;
 		purchase *purchaseHistory; 	// member purchase history
+		string   memberType;  		// the type of Member
+		string   name;	     		// Member name
 };
 
 #endif /* BASIC_H_ */

@@ -35,5 +35,7 @@ char ValidateInput(const string CHAR_PROMPT,  // IN & CALC - Character prompt
 void     ReadInDailyPurchases(string date, BulkClub *list);
 BulkClub *ReadInFromFile(BulkClub   *list);
 string   FromDailyPurchaseToMember(Basic *memberPtr );
+string 	 ItemsSortedByName(BulkClub *list);
 string   SearchForExpirationDate (int month,BulkClub *list);
+string SearchByItemSold(string searchItem, BulkClub *list);
 #endif /* HEADER_H_ */

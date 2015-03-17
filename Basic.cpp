@@ -35,6 +35,7 @@ Basic::Basic(string 		 memberName,		//overloaded constructor
 	xDate          = memberExpDate;
 	purchasesTotal = memberTotSpent;
 	purchaseHistory =NULL;
+
 }
 
 // Destructor - destroys an animal object
@@ -50,12 +51,46 @@ void Basic::SetAllValues(string memberName,
 }
 void Basic::AddPurchaseToList(purchase *dailyPurchase)
 {
-			// creating a new node for more info
-			dailyPurchase->next  = purchaseHistory;
-			purchaseHistory      = dailyPurchase;
-			purchasesTotal		+= (dailyPurchase->price + (dailyPurchase->price * .0875));
-			purchaseNoTax       += dailyPurchase->price;
-			dailyPurchase		 = NULL;
+
+	if(purchaseHistory == NULL)
+			{
+	   	     	quantityPerDay       =   0;
+	   	     	maxDailyPurchase	 =   0;
+	   	        purchaseNoTax		 =   0;
+	   	        purchasesTotal		 =   0;
+				dailyPurchase->next  = purchaseHistory;
+				purchaseHistory      = dailyPurchase;
+				purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
+				purchasesTotal		 = (purchaseNoTax + (purchaseNoTax * .0875));
+				quantityPerDay      +=  dailyPurchase->quantity;
+				maxDailyPurchase	+= purchasesTotal;
+
+			}
+	 		// creating a new node for more info
+   else if(dailyPurchase->purchaseDate.DisplayDate() != purchaseHistory->purchaseDate.DisplayDate())
+		{
+	   	   	   	   	quantityPerDay       =   0;
+	   	   	   	   	maxDailyPurchase	 =   0;
+					dailyPurchase->next  = purchaseHistory;
+					purchaseHistory      = dailyPurchase;
+					purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
+					purchasesTotal		+= (purchaseNoTax + (purchaseNoTax * .0875));
+					quantityPerDay      +=  dailyPurchase->quantity;
+					maxDailyPurchase	+= purchasesTotal;
+		}
+
+			else
+		{
+				if(quantityPerDay <= 200 && maxDailyPurchase <= 200)
+				{
+					dailyPurchase->next  = purchaseHistory;
+					purchaseHistory      = dailyPurchase;
+					purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
+					purchasesTotal		+= (purchaseNoTax + (purchaseNoTax * .0875));
+					quantityPerDay      +=  dailyPurchase->quantity;
+					maxDailyPurchase	+= purchasesTotal;
+				}
+		}
 }
 // INPUT - sets the animal type
 void Basic::SetMemberType(string member)
@@ -90,6 +125,14 @@ int Basic::GetId() const
 {
 	return id;
 }
+float  Basic::GetTotalPurchase()const
+{
+	return purchasesTotal;
+}
+float  Basic::GetTotalPurchaseNoTax() const
+{
+	return purchaseNoTax;
+}
 // OUTPUT - gets the breed
 string Basic::GetMemberType() const
 {
@@ -97,7 +140,7 @@ string Basic::GetMemberType() const
 }
 
 // OUTPUT - gets the name and age
-void Basic::GetNameAndId(string &memberName,
+void Basic::SetNameAndId(string &memberName,
 						   int	  &memberId) const
 {
 	memberName = name;
@@ -106,6 +149,10 @@ void Basic::GetNameAndId(string &memberName,
 void Basic::ChangeExpireDate()
 {
 	xDate.AutoSetDate();
+}
+void  Basic::SetDailyQuantity(int amount)
+{
+	quantityPerDay = amount;
 }
 // OUTPUT - gets the next pointer
 Basic *Basic::GetNext() const
@@ -173,6 +220,10 @@ string Basic::Ellipsis(string inputStr,	//CALC - input string
 
 	return OUTPUT.str();
 }
+purchase *Basic::GetPurchaseHead()
+{
+	return purchaseHistory;
+}
 float Basic::MembershipAnnualCost(Date currentDate)
 {
 	if((xDate.GetYear() - currentDate.GetYear()) == 0)
@@ -185,7 +236,10 @@ string Basic::OutputPurchaseDisplay() const
 {
 	ostringstream output;
 	purchase *ptr;
-	float 	purchase;
+	float 	purchase ;
+	float   purchaseNoTax;
+
+	purchaseNoTax = 0;
 	ptr = purchaseHistory;
 	while(ptr != NULL)
 	{
@@ -194,11 +248,17 @@ string Basic::OutputPurchaseDisplay() const
 			output << setw(40) << ptr->product;
 			output << setw(10) <<  ptr->price;
 			output << setw(10) <<  ptr->quantity	<< endl;
+
 			purchase += 	(ptr->price * ptr->quantity)
 							+ ((ptr->price * ptr->quantity) * .0875);
+			purchaseNoTax += ptr->price * ptr->quantity;
 			ptr = ptr->next;
 	}
-
+	output << endl;
+	output << left;
+	output << setw(35) << "Total amount spent without tax: ";
+	output << right;
+	output << fixed    << setprecision(2) << purchaseNoTax;
 
 
 	return output.str();
@@ -220,7 +280,7 @@ string Basic::OutputListing() const
 	output << setw(MEM_TYPE_COL)     << memberType;
 	output << setw(MEM_EXP_DATE_COL) << xDate.DisplayDate();
 	output << setw(TOT_SPENT_COL)	 << fixed << setprecision(2)
-									 <<purchasesTotal;
+									 << purchasesTotal;
 
 
 	return output.str();

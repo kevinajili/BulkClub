@@ -3,8 +3,6 @@
 int main()
 {
 	BulkClub   *list;			// CALC		  - list of members
-	purchase   *dayOne;			// CALC 	  - purchase for day
-	Date	   xDate;			// CALC
 	Basic      *memberPtr;		// CALC & OUT - accesses members from list
 	Preferred  *memberPtrP;
 	string      name;			// IN & OUT   - name of members
@@ -14,13 +12,12 @@ int main()
 	MenuOptions menuChoice;		// CALC 	  - user menu choice
 	char		memberType;		// IN         - used to input
 	char 		searchOp;       //
-	Date		newXDate;
-	string	    searchItem;
-	dayOne   = NULL;
+	Date		newXDate;		//IN & CALC   - used to change member expiration date
+	string	    searchItem;		//IN & CALC   - used to search for item sold
 	list 	 = NULL;
-    list = new BulkClub;
+    list     = new BulkClub;
 
-	list     = ReadInFromFile(list);
+	 list  = ReadInFromFile(list);
 	 ReadInDailyPurchases("day1.txt", list);
 	 ReadInDailyPurchases("day2.txt",  list);
 	 ReadInDailyPurchases("day3.txt",  list);
@@ -56,7 +53,7 @@ int main()
 			    "**************************************\n";
 
 		// INPUT - gets & error checks menu input
-		menuChoice = MenuOptions(ValidateInput(MENU_PROMPT, 0, 9));
+		menuChoice = MenuOptions(ValidateInput(MENU_PROMPT, 0, 12));
 		cout << endl;
 
 		//WHILE - exits when menu selection is EXIT
@@ -230,7 +227,7 @@ int main()
 							}
 							else
 							{
-								cout << name << " is not a part of the Bulk Club\n\n";
+								cout << id << " is not a part of the Bulk Club\n\n";
 							}
 
 						}
@@ -270,7 +267,7 @@ int main()
 											}
 											else
 											{
-												cout << name << " is not a part of the Bulk Club\n\n";
+												cout << id << " is not a part of the Bulk Club\n\n";
 											}
 										}
 										break;
@@ -281,9 +278,11 @@ int main()
 								break;
 
 				case SEARCH_BY_ITEM_SOLD:
-								cout << "Search By item sold\n";
+								cout << "Search By item sold: ";
 								getline(cin, searchItem);
-
+								cout << SearchByItemSold(searchItem, list);
+								cout << endl << endl;
+								break;
 
 				case EXIT:
 							cout << "loop error";
@@ -291,7 +290,7 @@ int main()
 			}
 
 			// INPUT - gets & error checks new menu input
-					menuChoice = MenuOptions(ValidateInput(MENU_PROMPT, 0, 9));
+					menuChoice = MenuOptions(ValidateInput(MENU_PROMPT, 0, 12));
 					cout << endl;
 
 		}
