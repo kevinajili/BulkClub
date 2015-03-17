@@ -61,7 +61,7 @@ void PurchaseInfoToMember(purchase *Day, BulkClub *list)
 			}
 			dayVar = ptr->purchaseDate.GetDay();
 			ptr = ptr->next;
-			if(dayVar !=)
+//			if(dayVar !=)
 
 		}
 
