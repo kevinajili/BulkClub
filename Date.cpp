@@ -114,19 +114,19 @@ bool Date::CompareDate(Date purchase)
 	{
 		valid = dateYear == purchase.GetYear();
 	}
-
+	return valid;
 }
 void Date::AutoSetDate()
 {
-	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 	int currentYear;
 	int currentMonth;
 	int currentDay;
-	int lastDayInMonth;
+
 	tm *currentTime;     // Used to find the current time
 
 	// Find the current year based on the currentTime
-	time_t now  = time(0);
+	time_t now   = time(0);
 	currentTime  = localtime(&now);
 	currentYear  = 1900 + currentTime->tm_year;
 	currentMonth = 1 + currentTime->tm_mon;
