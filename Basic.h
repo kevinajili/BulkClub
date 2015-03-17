@@ -21,6 +21,7 @@ struct purchase
 	float     price;
 	int    	  quantity;
 	purchase *next;
+	purchase *prev;
 };
 class Basic
 {
@@ -41,6 +42,7 @@ class Basic
 		void SetDailyQuantity(int amount);
 		void AddPurchaseToList(purchase *dailyPurchase);
 		void SetNext(Basic *nextNode);			    // sets the next pointer
+		void SetPrev(Basic *prevNode);
 		void SetMemberType(string memberType); 		// sets the member type
 		void MembershipCost(string cost);			// sets the membership cost
 		void SetPurchaseHistory(purchase *myPurchaseHistoy);
@@ -53,6 +55,7 @@ class Basic
 		 *******************/
 		Basic *GetNext()               const;		// return pointer to
 												    // to next Member
+		Basic *GetPrev()				const;
 		Date   GetDate() const;
 		float  MembershipAnnualCost(Date currentDate);
 		float  GetTotalPurchase()const;
@@ -85,6 +88,7 @@ class Basic
 		purchase *purchaseHistory; 	// member purchase history
 		string   memberType;  		// the type of Member
 		string   name;	     		// Member name
+		Basic	 *prev;
 };
 
 #endif /* BASIC_H_ */

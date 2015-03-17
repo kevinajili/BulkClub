@@ -27,14 +27,14 @@ Basic::Basic(string 		 memberName,		//overloaded constructor
 			 Date			 memberExpDate,
 			 float			 memberTotSpent)
 {
-	name 		   = memberName;
-	id             = memberNumber;
-	next           = NULL;
-	memberType     = membershipType;
-	membershipCost = 55.00;
-	xDate          = memberExpDate;
-	purchasesTotal = memberTotSpent;
-	purchaseHistory =NULL;
+	name 		    = memberName;
+	id              = memberNumber;
+	next            = NULL;
+	memberType      = membershipType;
+	membershipCost  = 55.00;
+	xDate           = memberExpDate;
+	purchasesTotal  = memberTotSpent;
+	purchaseHistory = NULL;
 
 }
 
@@ -59,10 +59,12 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 	   	        purchaseNoTax		 =   0;
 	   	        purchasesTotal		 =   0;
 				dailyPurchase->next  = purchaseHistory;
+				purchaseHistory->prev = dailyPurchase;
+				dailyPurchase->prev	 = NULL;
 				purchaseHistory      = dailyPurchase;
 				purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
 				purchasesTotal		 = (purchaseNoTax + (purchaseNoTax * .0875));
-				quantityPerDay      +=  dailyPurchase->quantity;
+				quantityPerDay++;
 				maxDailyPurchase	+= purchasesTotal;
 
 			}
@@ -75,7 +77,7 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 					purchaseHistory      = dailyPurchase;
 					purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
 					purchasesTotal		+= (purchaseNoTax + (purchaseNoTax * .0875));
-					quantityPerDay      +=  dailyPurchase->quantity;
+					quantityPerDay++;
 					maxDailyPurchase	+= purchasesTotal;
 		}
 
@@ -87,7 +89,7 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 					purchaseHistory      = dailyPurchase;
 					purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
 					purchasesTotal		+= (purchaseNoTax + (purchaseNoTax * .0875));
-					quantityPerDay      +=  dailyPurchase->quantity;
+					quantityPerDay++;
 					maxDailyPurchase	+= purchasesTotal;
 				}
 		}
@@ -110,7 +112,10 @@ void Basic::SetNext(Basic *nextNode)
 {
 	next = nextNode;
 }
-
+void Basic::SetPrev(Basic *prevNode)
+{
+	prev = prevNode;
+}
 void Basic::SetPurchaseHistory(purchase *myPurchaseHistory)
 {
 	purchaseHistory = myPurchaseHistory;
@@ -159,7 +164,10 @@ Basic *Basic::GetNext() const
 {
 	return next;
 }
-
+Basic *Basic::GetPrev() const
+{
+	return prev;
+}
 // OUTPUT - returns name, age & width as a string ready for output
 string Basic::TableDisplay(const int MEMBERSHIP_WIDTH,
 							const int NAME_WIDTH,

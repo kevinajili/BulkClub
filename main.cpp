@@ -24,28 +24,21 @@ int main()
 	 ReadInDailyPurchases("day4.txt",  list);
 	 ReadInDailyPurchases("day5.txt",  list);
 
-	const string MENU_PROMPT =
-								"Bulk Club Menu\n"
+	const string MENU_PROMPT =	"Bulk Club Menu\n"
 								"1  - Add Member \n"
 								"2  - Remove Member\n"
 								"3  - Search for member expiration Date\n"
 								"4  - Find Member\n"
 								"5  - List Size\n"
 								"6  - Change status\n"
-								"7  - First member\n"
-								"8  - Member expiration date\n"
-								"9  - Output List\n"
-								"10 - View a customers purchase history\n"
-								"11 - Search By Item\n"
-								"12 - Clear List\n"
+								"7  - Member expiration date\n"
+								"8  - Output List\n"
+								"9  - View a customers purchase history\n"
+								"10 - Search By Item\n"
+								"11 - Clear List\n"
 								"0  - EXIT\n"
 								"Enter selection: ";
-	const string MENU_OUTPUT= 	"Output Menu\n"
-								"1 - Sales Report Day \n"
-								"2 - Remove Member\n"
-								"3 - Find Member\n"
-								"4 - List Size\n"
-								"5 - Change status\n";
+
 
 
 	    cout << "**************************************\n"
@@ -111,6 +104,7 @@ int main()
 					cin  >> monthSearch;
 
 					cout << SearchForExpirationDate(monthSearch,list);
+					cout << endl << endl;
 							break;
 				case FIND :
 					searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
@@ -193,20 +187,22 @@ int main()
 						}
 					}
 											break;
-				case FIRST_MEMBER:
-										list->FirstMember()->GetName();
-										break;
+
 				case CHANGE_MMEBEREXDATE:
-					searchOp = ValidateInput("Find by Name or Id", 'N','I');
+					searchOp = ValidateInput("Find by Name or Id:   ", 'N','I');
 						if(searchOp == 'N')
 						{
-							cout << "Enter the member\'s name:        ";
+							cout << setw(32) <<"Enter the member\'s name:";
 							getline(cin, name);
 							memberPtr = list->FindMember(name);
 							if(memberPtr != NULL)
 							{
 
 								memberPtr->ChangeExpireDate();
+								cout << "The member expiration date for "
+									 << memberPtr->GetName()   <<    " is now  "
+									 << memberPtr->GetDate().DisplayDate();
+								cout << endl<< endl<< endl;
 
 							}
 							else
@@ -217,13 +213,17 @@ int main()
 
 						else
 						{
-							cout << "Enter the member\'s id:          ";
+							cout << left;
+							cout << setw(32) << "Enter the member\'s id:";
 							cin  >> id;
 							memberPtr = list->FindMember(id);
 							if(memberPtr != NULL)
 							{
-								cout << memberPtr->Display();
-								cout << name;
+								memberPtr->ChangeExpireDate();
+								cout << "The member expiration date for "
+									 << memberPtr->GetName()   <<    " is now  "
+									 << memberPtr->GetDate().DisplayDate();
+								cout << endl<< endl<< endl;
 							}
 							else
 							{
@@ -233,44 +233,42 @@ int main()
 						}
 								break;
 				case OUTPUT :
-
-
 								cout << "Bulk Club Members:\n";
 					            cout << list->OutputList();
 								cout << endl;
 								break;
 				case OUTPUT_PURCHASES_BYCUSTOMER:
-					                    searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
-										if(searchOp == 'N')
-										{
-											cout << "Enter the member\'s name: ";
-											getline(cin, name);
-											memberPtr = list->FindMember(name);
-											if(memberPtr != NULL)
-											{
-												cout << FromDailyPurchaseToMember(memberPtr);
-											}
-											else
-											{
-												cout << name << " is not a part of the Bulk Club\n\n";
-											}
-										}
+							searchOp = ValidateInput("Find by Name or Id:      ", 'N','I');
+							if(searchOp == 'N')
+							{
+								cout << "Enter the member\'s name: ";
+								getline(cin, name);
+								memberPtr = list->FindMember(name);
+								if(memberPtr != NULL)
+								{
+									cout << FromDailyPurchaseToMember(memberPtr);
+								}
+								else
+								{
+									cout << name << " is not a part of the Bulk Club\n\n";
+								}
+							}
 
-										else
-										{
-											cout << "Enter the member\'s id:   ";
-											cin  >> id;
-											memberPtr = list->FindMember(id);
-											if(memberPtr != NULL)
-											{
-												cout << FromDailyPurchaseToMember(memberPtr);
-											}
-											else
-											{
-												cout << id << " is not a part of the Bulk Club\n\n";
-											}
-										}
-										break;
+							else
+							{
+								cout << "Enter the member\'s id:   ";
+								cin  >> id;
+								memberPtr = list->FindMember(id);
+								if(memberPtr != NULL)
+								{
+									cout << FromDailyPurchaseToMember(memberPtr);
+								}
+								else
+								{
+									cout << id << " is not a part of the Bulk Club\n\n";
+								}
+							}
+							break;
 				case CLEAR :
 								cout << "Clearing list!\n";
 								list->ClearList();
