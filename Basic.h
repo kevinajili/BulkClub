@@ -72,7 +72,7 @@ class Basic
 		string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
-<<<<<<< HEAD
+							 
 		string OutputPurchaseDisplay() const;
 		string OutputListing()const;
 		string GetName() const;							// gets the Member name
@@ -86,11 +86,6 @@ class Basic
 					    int maxLength) const;	   		// with "..."
 		Basic *GetNext() const;							// return pointer to
 														// to next Member
-=======
-		string outputPurchaseDisplay() const;
-		string OutputListing()         const;
-		string GetName()     		   const;		// gets the Member name
->>>>>>> master
 		string GetMemberExpireDate();
 	private:
 		Basic    *next;		 		// pointer to next Member
