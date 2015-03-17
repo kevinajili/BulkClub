@@ -44,5 +44,10 @@ string FromDailyPurchaseToMember(Basic *memberPtr )
 
 	output << memberPtr->outputPurchaseDisplay();
 	output << endl;
+	output << left;
+	output << setw(35) << "Total amount spent with tax: ";
+	output << right;
+	output << fixed    << setprecision(2) << memberPtr->GetTotalPurchase();
+	output << endl << endl;
 	return output.str();
 }
