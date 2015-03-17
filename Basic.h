@@ -54,7 +54,7 @@ class Basic
 		 string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
-		string outputPurchaseDisplay() const;
+		string OutputPurchaseDisplay() const;
 		string OutputListing()const;
 		string GetName() const;							// gets the Member name
 		int    GetId()   const;  						// gets the Member type

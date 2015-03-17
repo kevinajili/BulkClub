@@ -42,7 +42,7 @@ string FromDailyPurchaseToMember(Basic *memberPtr )
 	output << endl;
 
 
-	output << memberPtr->outputPurchaseDisplay();
+	output << memberPtr->OutputPurchaseDisplay();
 	output << endl;
 	return output.str();
 }
