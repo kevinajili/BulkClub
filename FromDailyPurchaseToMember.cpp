@@ -1,4 +1,10 @@
 #include "Header.h"
+
+/**************************************************************************
+ *  FromDailyPurchaseToMember
+ *  ----------------------------------------------------------------------
+ *  Displays purchases for given member
+ *************************************************************************/
 string FromDailyPurchaseToMember(purchase *Day, Basic *memberPtr )
 {
 

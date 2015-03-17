@@ -4,6 +4,11 @@
 
 #include "Basic.h"
 
+/**************************************************************************
+ * CLASS Preferred
+ * This object is a derived class of basic, it stores the same information,
+ * but preferred members get a 6% rebate near the end of each year.
+ *************************************************************************/
 class Preferred: public Basic
 {
 public:
@@ -21,6 +26,9 @@ public:
 
 	/**********************************************************************
 	 * MUTATORS
+	 * -------------------------------------------------------------------
+	 * SetAllValues
+	 * SetRebate
 	 **********************************************************************/
 
 	void SetAllValues(string 		 memberName,	//Sets all of the values
@@ -35,13 +43,15 @@ public:
 
 	/**********************************************************************
 	 * ACCESSORS
+	 * -------------------------------------------------------------------
+	 * GetRebate
 	 **********************************************************************/
 	float GetRebate() const;				   //Returns the value for rebate
 
 
 private:
 
-	float rebate;
+	float rebate;			//rebate for end of the year
 };
 
 

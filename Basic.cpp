@@ -1,12 +1,12 @@
 #include "Basic.h"
 
-/**************************************************************************
+/******************************************************************************
  * CLASS Basic
- *   This object stores the name, age, and value of an animal.  These
- *   values are obtained from the main program.
- *************************************************************************/
+ *   This object stores the name, id, and member type of a Basic member.
+ *   These values are obtained from the main program.
+ *******************************************************************************/
 
-// Constructor - creates an animal instance
+// Constructor - creates an basic instance
 Basic::Basic()
 {
 	name  = "";
@@ -20,8 +20,9 @@ Basic::Basic()
 	purchaseNoTax = 0;
 }
 
-// Non - default constructor - creates animal instance
-Basic::Basic(string 		 memberName,		//overloaded constructor
+// Non - default constructor - creates a basic instance
+//overloaded constructor
+Basic::Basic(string 		 memberName,
 			 int    		 memberNumber,
 			 string          membershipType,
 			 Date			 memberExpDate,
@@ -38,8 +39,26 @@ Basic::Basic(string 		 memberName,		//overloaded constructor
 
 }
 
-// Destructor - destroys an animal object
+// Destructor - destroys a basic object
 Basic::~Basic() {}
+
+
+
+/************************************************************************
+     MUTATORS
+ -------------------------------------------------------------------------
+ SetAllValues
+ ChangeExpireDate
+ SetDailyQuantity
+ AddPurchaseToList
+ SetNext
+ SetMemberType
+ MembershipCost
+ SetPurchaseHistory
+ SetTotalSpent
+ SetNameAndId
+ ************************************************************************/
+
 
 // INPUT - sets the initial value of the Basic member
 void Basic::SetAllValues(string memberName,
@@ -49,6 +68,8 @@ void Basic::SetAllValues(string memberName,
 	id   	   = memberId;
 	memberType = "Basic";
 }
+
+//INPUT - Adds a purchase to purchase history
 void Basic::AddPurchaseToList(purchase *dailyPurchase)
 {
 
@@ -97,10 +118,14 @@ void Basic::SetMemberType(string member)
 {
 	memberType = member;
 }
+
+//INPUT - sets membership cost
 void Basic::MembershipCost(string cost)
 {
 		membershipCost = atof(cost.c_str());
 }
+
+//INPUT - sets total spent
 void Basic::SetTotalSpent(float totalSpent)
 {
 	purchasesTotal = totalSpent;
@@ -111,49 +136,78 @@ void Basic::SetNext(Basic *nextNode)
 	next = nextNode;
 }
 
+//INPUT - sets purchase history
 void Basic::SetPurchaseHistory(purchase *myPurchaseHistory)
 {
 	purchaseHistory = myPurchaseHistory;
 }
 
-// OUTPUT - gets the name
-string Basic::GetName() const
-{
-	return name;
-}
-int Basic::GetId() const
-{
-	return id;
-}
-float  Basic::GetTotalPurchase()const
-{
-	return purchasesTotal;
-}
-float  Basic::GetTotalPurchaseNoTax() const
-{
-	return purchaseNoTax;
-}
-// OUTPUT - gets the breed
-string Basic::GetMemberType() const
-{
-	return memberType;
-}
-
-// OUTPUT - gets the name and age
+//INPUT - sets name and id
 void Basic::SetNameAndId(string &memberName,
 						   int	  &memberId) const
 {
 	memberName = name;
 	memberId  = id;
 }
+
+//INPUT - changes the expiration date of a membership
 void Basic::ChangeExpireDate()
 {
 	xDate.AutoSetDate();
 }
+
+//INPUT - sets the daily amount
 void  Basic::SetDailyQuantity(int amount)
 {
 	quantityPerDay = amount;
 }
+/******************************************************
+     ACCESSORS
+    ------------------------------------------------
+    *GetNext()
+  	 GetDate()
+  	 MembershipAnnualCost
+  	 GetTotalPurchase()
+  	 GetTotalPurchaseNoTax()
+  	 GetId()
+  	 *GetPurchaseHead()
+  	 Display()
+  	 GetMemberType()
+  	 StringConvert(int integer)
+  	 Ellipsis
+  	 TableDisplay
+  	 outputPurchaseDisplay()
+  	 OutputListing()
+  	 GetName()
+  	 GetMemberExpireDate()
+ ******************************************************/
+// OUTPUT - gets the name
+string Basic::GetName() const
+{
+	return name;
+}
+// OUTPUT - gets the id
+int Basic::GetId() const
+{
+	return id;
+}
+// OUTPUT - gets the total purchases
+float  Basic::GetTotalPurchase()const
+{
+	return purchasesTotal;
+}
+// OUTPUT - gets the total purchase before tax
+float  Basic::GetTotalPurchaseNoTax() const
+{
+	return purchaseNoTax;
+}
+// OUTPUT - gets the member type
+string Basic::GetMemberType() const
+{
+	return memberType;
+}
+
+
 // OUTPUT - gets the next pointer
 Basic *Basic::GetNext() const
 {
@@ -195,6 +249,8 @@ string Basic::StringConvert(int integer) const
 
     return OUTPUT.str();
 }
+
+//OUPUT - gets current date
 Date   Basic::GetDate() const
 {
 	return xDate;
@@ -220,10 +276,14 @@ string Basic::Ellipsis(string inputStr,	//CALC - input string
 
 	return OUTPUT.str();
 }
+
+//OUTPUT - returns the purchase history for member
 purchase *Basic::GetPurchaseHead()
 {
 	return purchaseHistory;
 }
+
+//OUTPUT - returns the new membership cost based on date of membership
 float Basic::MembershipAnnualCost(Date currentDate)
 {
 	if((xDate.GetYear() - currentDate.GetYear()) == 0)
@@ -232,6 +292,8 @@ float Basic::MembershipAnnualCost(Date currentDate)
 	}
 	return membershipCost;
 }
+
+//OUTPUT - displays the purchases of a member
 string Basic::outputPurchaseDisplay() const
 {
 	ostringstream output;
@@ -263,6 +325,8 @@ string Basic::outputPurchaseDisplay() const
 
 	return output.str();
 }
+
+//OUPUT - displays a listing of a member
 string Basic::OutputListing() const
 {
 	ostringstream output;
@@ -285,6 +349,8 @@ string Basic::OutputListing() const
 
 	return output.str();
 }
+
+//OUTPUT - gets the member's expiration date
 string Basic::GetMemberExpireDate()
 {
 	    return xDate.DisplayDate();
