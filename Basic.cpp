@@ -239,7 +239,7 @@ float Basic::MembershipAnnualCost(Date currentDate)
 	}
 	return membershipCost;
 }
-string Basic::OutputPurchaseDisplay() const
+string Basic::outputPurchaseDisplay() const
 {
 	ostringstream output;
 	purchase *ptr;

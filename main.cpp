@@ -8,6 +8,9 @@ int main()
 	string      name;			// IN & OUT   - name of members
 	int         id;				// IN & OUT   - age of members
 	int 	    monthSearch;
+	int 		month;
+	int 		day;
+	int			year;
 	bool        found;			// CALC 	  - determines if remove success
 	MenuOptions menuChoice;		// CALC 	  - user menu choice
 	char		memberType;		// IN         - used to input
@@ -35,7 +38,8 @@ int main()
 								"8  - Output List\n"
 								"9  - View a customers purchase history\n"
 								"10 - Search By Item\n"
-								"11 - Clear List\n"
+								"11 - Search purchase by Date\n"
+								"12 - Clear List\n"
 								"0  - EXIT\n"
 								"Enter selection: ";
 
@@ -78,8 +82,8 @@ int main()
 							id  = ValidateInput("Enter your member\'s ID number:  ", 0, 99999);
 
 							newXDate.AutoSetDate();
-							memberPtrP = new Preferred(name,id,"Preferred",newXDate,0.0,.06);
-							memberPtr = memberPtrP;
+							memberPtr = new Preferred(name,id,"Preferred",newXDate,0.0,.06);
+
 							cout << endl;
 							cout << memberPtr->Display();
 							list->AddMember(memberPtr);
@@ -281,7 +285,17 @@ int main()
 								cout << SearchByItemSold(searchItem, list);
 								cout << endl << endl;
 								break;
-
+				case SEARCH_BY_DATE:
+								cout <<"Enter the month (MM formating): ";
+								cin  >> month;
+								cout << "Enter the day  (DD formating): ";
+								cin  >> day;
+								cout << "Enter the year (YYYY formating):  ";
+								cin  >> year;
+								cout << endl << endl;
+								newXDate.SetDate(month, day, year);
+								cout << SearchByDailySales(list,newXDate);
+								break;
 				case EXIT:
 							cout << "loop error";
 							break;

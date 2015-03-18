@@ -72,20 +72,9 @@ class Basic
 		string TableDisplay(const int MEMBERSHIP_WIDTH,
 							 const int NAME_WIDTH,
 							 const int ID_WIDTH) const;
-							 
-		string OutputPurchaseDisplay() const;
-		string OutputListing()const;
-		string GetName() const;							// gets the Member name
-		int    GetId()   const;  						// gets the Member type
-		void   GetNameAndId(string &memberName,
-							int    &memberId)  const;  // gets Member age
-		Date   GetDate() const;
-		string GetMemberType() const;
-		string StringConvert(int integer) const;   		// converts int to string
-		string Ellipsis(string inputStr,		   		// shortens long strings
-					    int maxLength) const;	   		// with "..."
-		Basic *GetNext() const;							// return pointer to
-														// to next Member
+		string outputPurchaseDisplay() const;
+		string OutputListing()         const;
+		string GetName()     		   const;		// gets the Member name
 		string GetMemberExpireDate();
 	private:
 		Basic    *next;		 		// pointer to next Member

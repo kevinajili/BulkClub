@@ -20,6 +20,7 @@ enum MenuOptions
 	OUTPUT,
 	OUTPUT_PURCHASES_BYCUSTOMER,
 	SEARCH_BY_ITEM_SOLD,
+	SEARCH_BY_DATE,
 	CLEAR		// User chooses to display attributes to the screen
 };
 
@@ -37,4 +38,5 @@ string   FromDailyPurchaseToMember(Basic *memberPtr );
 string 	 ItemsSortedByName(BulkClub *list);
 string   SearchForExpirationDate (int month,BulkClub *list);
 string SearchByItemSold(string searchItem, BulkClub *list);
+string SearchByDailySales(BulkClub *list, Date searchDate);
 #endif /* HEADER_H_ */

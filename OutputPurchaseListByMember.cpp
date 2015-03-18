@@ -42,7 +42,7 @@ string FromDailyPurchaseToMember(Basic *memberPtr )
 	output << endl;
 
 
-	output << memberPtr->OutputPurchaseDisplay();
+	output << memberPtr->outputPurchaseDisplay();
 	output << endl;
 	output << left;
 	output << setw(35) << "Total amount spent with tax: ";
