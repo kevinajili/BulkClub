@@ -16,9 +16,21 @@ BulkClub::~BulkClub()
 // INPUT - adds instance of member to list
 void BulkClub::AddMember(Basic *newMember)
 {
+
+	if(head != NULL)
+	{
 	newMember->SetNext(head);
+	head->SetPrev(newMember);
+	newMember->SetPrev(NULL);
 	head = newMember;
 	memberCount++;
+	}
+	else
+	{
+		newMember->SetNext(head);
+		head = newMember;
+		memberCount++;
+	}
 }
 
 // INPUT - removes instance of member from list
@@ -39,12 +51,15 @@ bool BulkClub::RemoveMember(string searchKey)
 			pointer3 = pointer2->GetNext();
 			pointer->SetNext(pointer3);
 			delete pointer2;
+			pointer->SetNext(pointer3);
+			pointer3->SetPrev(pointer);
 			removed = true;
 			memberCount--;
 		}
 		else if(pointer->GetName() == searchKey)
 		{
 			head = pointer->GetNext();
+			head->SetPrev(NULL);
 			delete pointer;
 			removed = true;
 		}

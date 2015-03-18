@@ -59,7 +59,6 @@ void Basic::AddPurchaseToList(purchase *dailyPurchase)
 	   	        purchaseNoTax		 =   0;
 	   	        purchasesTotal		 =   0;
 				dailyPurchase->next  = purchaseHistory;
-				purchaseHistory->prev = dailyPurchase;
 				dailyPurchase->prev	 = NULL;
 				purchaseHistory      = dailyPurchase;
 				purchaseNoTax        = dailyPurchase->price * dailyPurchase->quantity;
